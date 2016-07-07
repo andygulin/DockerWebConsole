@@ -19,7 +19,7 @@ public class RedisServiceImpl implements RedisService {
 	@Autowired
 	private RedisTemplate<String, String> redisTemplate;
 
-	private StringRedisSerializer serializer = new StringRedisSerializer();
+	private final StringRedisSerializer serializer = new StringRedisSerializer();
 
 	@Override
 	public void set(final String key, final String value) {

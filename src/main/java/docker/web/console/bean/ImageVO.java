@@ -3,24 +3,24 @@ package docker.web.console.bean;
 public class ImageVO {
 
 	@IgnoreProperty
-	@Header(name = "创建时间")
+	@Header(name = "created")
 	private String created;
 
 	@Header(name = "ID")
 	private String id;
 
-	@Header(name = "父ID")
+	@Header(name = "parentId")
 	private String parentId;
 
-	@Header(name = "镜像名称")
+	@Header(name = "repoTags")
 	private String[] repoTags;
 
 	@IgnoreProperty
-	@Header(name = "镜像大小")
+	@Header(name = "size")
 	private String size;
 
 	@IgnoreProperty
-	@Header(name = "镜像虚拟大小")
+	@Header(name = "virtualSize小")
 	private String virtualSize;
 
 	public String getCreated() {

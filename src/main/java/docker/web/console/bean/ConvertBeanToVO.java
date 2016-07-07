@@ -31,7 +31,7 @@ public class ConvertBeanToVO {
 		itemVO.setDescription(item.getDescription());
 		itemVO.setName(item.getName());
 		itemVO.setStarCount(item.getStarCount());
-		itemVO.setOfficial(item.isOfficial() ? "是" : "否");
+		itemVO.setOfficial(Official.getText(item.isOfficial()));
 		return itemVO;
 	}
 }

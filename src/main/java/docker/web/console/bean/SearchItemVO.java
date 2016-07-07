@@ -2,16 +2,16 @@ package docker.web.console.bean;
 
 public class SearchItemVO {
 
-	@Header(name = "星数")
+	@Header(name = "starCount")
 	private int starCount;
 
-	@Header(name = "是否官方")
+	@Header(name = "official")
 	private String official;
 
-	@Header(name = "名称")
+	@Header(name = "name")
 	private String name;
 
-	@Header(name = "简介")
+	@Header(name = "desc")
 	private String description;
 
 	public int getStarCount() {

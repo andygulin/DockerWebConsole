@@ -33,14 +33,12 @@ public class DockerMgrController {
 
 	@RequestMapping(value = "/version", method = RequestMethod.GET)
 	public String version(Model model) {
-
 		model.addAttribute("version", JSON.toJSONString(dockerMgrService.getVersion()));
 		return "mgr/version";
 	}
 
 	@RequestMapping(value = "/images", method = RequestMethod.GET)
 	public String images(Model model) {
-
 		model.addAttribute("imageVOs", dockerMgrService.getImages());
 		model.addAttribute("headers", FieldUtil.getHeader(ImageVO.class));
 		return "mgr/images";

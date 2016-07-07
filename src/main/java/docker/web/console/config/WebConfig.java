@@ -1,8 +1,10 @@
-package docker.web.console.interceptor;
+package docker.web.console.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import docker.web.console.interceptor.SessionInterceptor;
 
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
