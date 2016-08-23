@@ -17,11 +17,7 @@ import docker.web.console.DockerClientManager;
 public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(HttpSession session) {
-		Object obj = session.getAttribute(Constants.SESSION_KEY);
-		if (obj != null) {
-			return "redirect:/mgr/main";
-		}
+	public String login() {
 		return "login";
 	}
 

@@ -32,23 +32,10 @@
 					<li id="li_info"><a href="${ctx }/mgr/info">信息</a></li>
 					<li id="li_version"><a href="${ctx }/mgr/version">版本</a></li>
 					<li id="li_images"><a href="${ctx }/mgr/images">镜像</a></li>
-					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li role="separator" class="divider"></li>
-							<li class="dropdown-header">Nav header</li>
-							<li><a href="#">Separated link</a></li>
-							<li><a href="#">One more separated link</a></li>
-						</ul>
-					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right"><li><a href="${ctx }/logout">Logout</a></li></ul>
 				<form class="navbar-form navbar-right" action="${ctx }/mgr/image/search">
-	            	<input type="text" class="form-control" placeholder="搜索镜像..." name="term" style="width:300px;">
+	            	<input type="text" class="form-control" placeholder="搜索镜像..." name="term" style="width:300px;" value="${param.term }">
 	         	</form>
 			</div>
 		</c:if>

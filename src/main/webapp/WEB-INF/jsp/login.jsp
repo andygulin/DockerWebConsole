@@ -21,7 +21,7 @@
 <script type="text/javascript">
 $(function(){
 	$("#serverUrl").focus();
-	$("#serverUrl").val("http://192.168.137.129:2375");
+	$("#serverUrl").val("tcp://192.168.209.130:2375");
 	$("#connect").click(function(){
 		var serverUrl = $("#serverUrl").val();
 		$.post("${ctx}/connect",{serverUrl : serverUrl},function(res){

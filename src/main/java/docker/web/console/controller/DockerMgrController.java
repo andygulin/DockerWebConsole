@@ -65,4 +65,17 @@ public class DockerMgrController {
 		}
 		return response;
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "/image/pull/{repository}", method = RequestMethod.POST)
+	public Response<String> pullImage(@PathVariable("repository") String repository) {
+		Response<String> response = null;
+		try {
+			dockerMgrService.pullImage(repository);
+			response = new Response<String>(true, "");
+		} catch (Exception e) {
+			response = new Response<String>(false, "");
+		}
+		return response;
+	}
 }

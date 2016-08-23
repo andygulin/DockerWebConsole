@@ -21,8 +21,7 @@
               				<td>${item.official }</td>
               				<td>${item.name }</td>
               				<td>${item.description }</td>
-              				<td>
-              				</td>
+              				<td><button type="button" class="btn btn-info btn-xs" onclick="pullImage('${item.name}')">安装</button></td>
               			</tr>
               		</c:forEach>
               	</tbody>
@@ -35,5 +34,18 @@ $(function(){
 	$("ul.nav.navbar-nav li").removeClass("active");
 	$("#li_images").addClass("active");
 });
+
+function pullImage(repository) {
+	if (confirm("确认安装?")) {
+		$.post("${ctx}/mgr/image/pull/" + repository, {},
+		function(res) {
+			if (res.success) {
+				alert("安装成功!");
+			} else {
+				alert("安装失败!");
+			}
+		});
+	}
+}
 </script>
 <%@ include file="/WEB-INF/jsp/inc/footer.jsp"%>

@@ -20,7 +20,7 @@ public class ImageVO {
 	private String size;
 
 	@IgnoreProperty
-	@Header(name = "virtualSize小")
+	@Header(name = "virtualSize")
 	private String virtualSize;
 
 	public String getCreated() {

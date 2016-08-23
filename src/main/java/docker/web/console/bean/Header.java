@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 @Documented
 @Retention(RUNTIME)
-@Target(value = FIELD)
+@Target(FIELD)
 public @interface Header {
 	String name() default "";
 }

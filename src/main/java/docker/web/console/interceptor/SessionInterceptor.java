@@ -6,7 +6,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.github.dockerjava.api.DockerClient;
+
 import docker.web.console.Constants;
+import docker.web.console.DockerClientManager;
 
 public class SessionInterceptor extends HandlerInterceptorAdapter {
 
@@ -16,6 +19,12 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute(Constants.SESSION_KEY);
 		if (obj == null) {
+			response.sendRedirect(request.getServletContext().getContextPath());
+			return false;
+		}
+
+		DockerClient client = DockerClientManager.getInstance().getClient();
+		if (client == null) {
 			response.sendRedirect(request.getServletContext().getContextPath());
 			return false;
 		}

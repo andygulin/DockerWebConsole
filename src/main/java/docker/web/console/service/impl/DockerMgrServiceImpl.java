@@ -28,22 +28,23 @@ public class DockerMgrServiceImpl implements DockerMgrService {
 	@Autowired
 	private RedisService redisService;
 
-	private final DockerClient client = DockerClientManager.getInstance().getClient();
-
 	@Override
 	public Info getInfo() {
+		DockerClient client = DockerClientManager.getInstance().getClient();
 		Info info = client.infoCmd().exec();
 		return info;
 	}
 
 	@Override
 	public Version getVersion() {
+		DockerClient client = DockerClientManager.getInstance().getClient();
 		Version version = client.versionCmd().exec();
 		return version;
 	}
 
 	@Override
 	public List<ImageVO> getImages() {
+		DockerClient client = DockerClientManager.getInstance().getClient();
 		List<Image> images = client.listImagesCmd().exec();
 		List<ImageVO> imageVOs = new ArrayList<>(images.size());
 		for (Image image : images) {
@@ -54,18 +55,21 @@ public class DockerMgrServiceImpl implements DockerMgrService {
 
 	@Override
 	public void removeImage(String imageId) throws Exception {
+		DockerClient client = DockerClientManager.getInstance().getClient();
 		client.removeImageCmd(imageId).withForce(true).exec();
 	}
 
 	@Override
 	public List<SearchItemVO> searchImages(String term) {
-		final String key = DigestUtils.md5Hex(term);
+		DockerClient client = DockerClientManager.getInstance().getClient();
+		final String key = "search:image:term:" + DigestUtils.md5Hex(term);
 		if (!redisService.exist(key)) {
 			List<SearchItem> items = client.searchImagesCmd(term).exec();
 			List<SearchItemVO> itemVOs = new ArrayList<>(items.size());
 			for (SearchItem item : items) {
 				itemVOs.add(ConvertBeanToVO.searchItem(item));
 			}
+			itemVOs.sort((o1, o2) -> o2.getStarCount() - o1.getStarCount());
 			redisService.setEx(key, JSON.toJSONString(itemVOs), 3600L);
 		}
 		return JSON.parseArray(redisService.get(key), SearchItemVO.class);
@@ -73,6 +77,7 @@ public class DockerMgrServiceImpl implements DockerMgrService {
 
 	@Override
 	public void pullImage(String repository) {
+		DockerClient client = DockerClientManager.getInstance().getClient();
 		try {
 			client.pullImageCmd(repository).exec(new PullImageResultCallback()).awaitCompletion();
 		} catch (InterruptedException e) {

@@ -24,6 +24,7 @@ public class ConnectController {
 			response = new Response<>(true, "");
 			session.setAttribute(Constants.SESSION_KEY, serverUrl);
 		} catch (Exception e) {
+			e.printStackTrace();
 			response = new Response<>(false, "");
 		}
 		return response;
