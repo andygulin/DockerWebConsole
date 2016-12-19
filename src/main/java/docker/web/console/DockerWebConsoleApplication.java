@@ -10,12 +10,12 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @SpringBootApplication
 public class DockerWebConsoleApplication extends SpringBootServletInitializer {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(DockerWebConsoleApplication.class);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DockerWebConsoleApplication.class, args);
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(DockerWebConsoleApplication.class, args);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(DockerWebConsoleApplication.class);
+    }
 }

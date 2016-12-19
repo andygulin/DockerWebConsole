@@ -1,24 +1,23 @@
 package docker.web.console.service;
 
-import java.util.List;
-
 import com.github.dockerjava.api.model.Info;
 import com.github.dockerjava.api.model.Version;
-
 import docker.web.console.bean.ImageVO;
 import docker.web.console.bean.SearchItemVO;
 
+import java.util.List;
+
 public interface DockerMgrService {
 
-	Info getInfo();
+    Info getInfo();
 
-	Version getVersion();
+    Version getVersion();
 
-	List<ImageVO> getImages();
+    List<ImageVO> getImages();
 
-	List<SearchItemVO> searchImages(String term);
+    List<SearchItemVO> searchImages(String term);
 
-	void removeImage(String imageId) throws Exception;
+    void removeImage(String imageId) throws Exception;
 
-	void pullImage(String repository);
+    void pullImage(String repository);
 }
