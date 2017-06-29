@@ -29,15 +29,13 @@ public class DockerMgrServiceImpl implements DockerMgrService {
     @Override
     public Info getInfo() {
         DockerClient client = DockerClientManager.getInstance().getClient();
-        Info info = client.infoCmd().exec();
-        return info;
+        return client.infoCmd().exec();
     }
 
     @Override
     public Version getVersion() {
         DockerClient client = DockerClientManager.getInstance().getClient();
-        Version version = client.versionCmd().exec();
-        return version;
+        return client.versionCmd().exec();
     }
 
     @Override
