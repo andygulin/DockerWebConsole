@@ -1,6 +1,6 @@
 package docker.web.console.bean;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -39,6 +39,6 @@ public class FieldUtil {
                 headers.add(field.getName());
             }
         }
-        return headers.toArray(new String[headers.size()]);
+        return headers.toArray(new String[0]);
     }
 }

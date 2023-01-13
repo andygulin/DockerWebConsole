@@ -1,30 +1,31 @@
 package docker.web.console.service.impl;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.PullImageResultCallback;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.api.model.Info;
 import com.github.dockerjava.api.model.SearchItem;
 import com.github.dockerjava.api.model.Version;
-import com.github.dockerjava.core.command.PullImageResultCallback;
 import docker.web.console.DockerClientManager;
 import docker.web.console.bean.ConvertBeanToVO;
 import docker.web.console.bean.ImageVO;
 import docker.web.console.bean.SearchItemVO;
 import docker.web.console.service.DockerMgrService;
-import docker.web.console.service.RedisService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class DockerMgrServiceImpl implements DockerMgrService {
 
     @Autowired
-    private RedisService redisService;
+    private StringRedisTemplate redisTemplate;
 
     @Override
     public Info getInfo() {
@@ -50,7 +51,7 @@ public class DockerMgrServiceImpl implements DockerMgrService {
     }
 
     @Override
-    public void removeImage(String imageId) throws Exception {
+    public void removeImage(String imageId) {
         DockerClient client = DockerClientManager.getInstance().getClient();
         client.removeImageCmd(imageId).withForce(true).exec();
     }
@@ -59,16 +60,16 @@ public class DockerMgrServiceImpl implements DockerMgrService {
     public List<SearchItemVO> searchImages(String term) {
         DockerClient client = DockerClientManager.getInstance().getClient();
         final String key = "search:image:term:" + DigestUtils.md5Hex(term);
-        if (!redisService.exist(key)) {
+        if (!redisTemplate.hasKey(key)) {
             List<SearchItem> items = client.searchImagesCmd(term).exec();
             List<SearchItemVO> itemVOs = new ArrayList<>(items.size());
             for (SearchItem item : items) {
                 itemVOs.add(ConvertBeanToVO.searchItem(item));
             }
             itemVOs.sort((o1, o2) -> o2.getStarCount() - o1.getStarCount());
-            redisService.setEx(key, JSON.toJSONString(itemVOs), 3600L);
+            redisTemplate.opsForValue().set(key, JSON.toJSONString(itemVOs), TimeUnit.HOURS.toHours(1L));
         }
-        return JSON.parseArray(redisService.get(key), SearchItemVO.class);
+        return JSON.parseArray(redisTemplate.opsForValue().get(key), SearchItemVO.class);
     }
 
     @Override

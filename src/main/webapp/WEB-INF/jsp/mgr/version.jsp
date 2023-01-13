@@ -20,7 +20,9 @@
         for (var i in version) {
             html.push("<tr>");
             html.push("<td>" + i + "</td>");
-            html.push("<td>" + version[i] + "</td>");
+            html.push("<td>");
+            html.push(version[i]);
+            html.push("</td>");
             html.push("</tr>");
         }
 

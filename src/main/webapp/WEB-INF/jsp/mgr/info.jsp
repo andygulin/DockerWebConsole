@@ -20,7 +20,9 @@
         for (var i in info) {
             html.push("<tr>");
             html.push("<td>" + i + "</td>");
-            html.push("<td>" + info[i] + "</td>");
+            html.push("<td>");
+            html.push(info[i]);
+            html.push("</td>");
             html.push("</tr>");
         }
 

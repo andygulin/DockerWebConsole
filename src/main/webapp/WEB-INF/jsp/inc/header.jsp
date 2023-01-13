@@ -29,15 +29,15 @@
         <c:if test="${not empty DOCKER_USER }">
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li id="li_info"><a href="${ctx }/mgr/info">信息</a></li>
-                    <li id="li_version"><a href="${ctx }/mgr/version">版本</a></li>
-                    <li id="li_images"><a href="${ctx }/mgr/images">镜像</a></li>
+                    <li id="li_info"><a href="${ctx }/mgr/info">Info</a></li>
+                    <li id="li_version"><a href="${ctx }/mgr/version">Version</a></li>
+                    <li id="li_images"><a href="${ctx }/mgr/images">Images</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="${ctx }/logout">Logout</a></li>
                 </ul>
                 <form class="navbar-form navbar-right" action="${ctx }/mgr/image/search">
-                    <input type="text" class="form-control" placeholder="搜索镜像..." name="term" style="width:300px;"
+                    <input type="text" class="form-control" placeholder="Search Images..." name="term" style="width:300px;"
                            value="${param.term }">
                 </form>
             </div>

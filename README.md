@@ -1,37 +1,41 @@
 # docker-web-console
 
-### 安装docker
+### Install Redis
 ```
-yum update
-	
-vi /etc/yum.repos.d/docker.repo
+......
+```
 
-[dockerrepo]
-name=Docker Repository
-baseurl=https://yum.dockerproject.org/repo/main/centos/7/
-enabled=1
-gpgcheck=1
-gpgkey=https://yum.dockerproject.org/gpg
+### Install Docker
+```
+yum install docker
+```
 
-yum install docker-engine docker-registry
-
-启动
+Start Docker
+```
 systemctl start docker
 ```
 
-### 支持TCP
+### Support TCP
 ```
 vi /lib/systemd/system/docker.service
-修改
+```
+Modify
+```
 ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
+```
 
-重新启动docker
+Restart Docker
+```
 systemctl daemon-reload
 systemctl restart docker
+```
 
-验证tcp
+Verify Tcp
+```
 docker -H tcp://127.0.0.1:2375 version
+```
 
-关闭防火墙
+Close firewalld
+```
 systemctl stop firewalld
 ```
